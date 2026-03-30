@@ -1,5 +1,6 @@
 import type { Actions, PageServerLoad } from './$types';
-import { ADMIN_USERNAME, ADMIN_PASSWORD } from '$env/dynamic/private';
+import { env } from '$env/dynamic/private';
+const { ADMIN_USERNAME, ADMIN_PASSWORD } = env;
 import { createSessionToken } from '$lib/server/auth';
 import { fail, redirect } from '@sveltejs/kit';
 

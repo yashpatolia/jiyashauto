@@ -1,4 +1,5 @@
-import { ADMIN_SECRET } from '$env/dynamic/private';
+import { env } from '$env/dynamic/private';
+const { ADMIN_SECRET } = env;
 import { createHmac, timingSafeEqual } from 'crypto';
 
 export function createSessionToken(username: string): string {
