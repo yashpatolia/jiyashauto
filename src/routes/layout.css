@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	/* Remap Tailwind's red scale around brand colour #dd3d53 */
+	--color-red-50:  #fff0f2;
+	--color-red-100: #ffdde1;
+	--color-red-200: #ffbdc4;
+	--color-red-300: #ff8f9c;
+	--color-red-400: #f46070;
+	--color-red-500: #e84d62;
+	--color-red-600: #dd3d53;
+	--color-red-700: #c02640;
+	--color-red-800: #9e1e35;
+	--color-red-900: #841d30;
+	--color-red-950: #490b18;
+
+	--font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: #dd3d53;
+	border-radius: 4px;
+}
+
+/* Focus ring using brand color */
+*:focus-visible {
+	outline: 2px solid #dd3d53;
+	outline-offset: 2px;
+}
+
+/* Transition for dark mode */
+body {
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
