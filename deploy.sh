@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 cd ~/jiyashauto
+git stash
 git pull origin master
 npm install --omit=dev
 npm run build

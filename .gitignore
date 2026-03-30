@@ -33,3 +33,6 @@ vite.config.ts.timestamp-*
 
 # Claude local settings
 .claude/settings.local.json
+
+# PM2 ecosystem config (contains credentials)
+ecosystem.config.cjs
