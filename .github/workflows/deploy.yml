@@ -17,4 +17,4 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
-          script: ~/deploy-jiyashauto.sh
+          script: bash ~/jiyashauto/deploy.sh
