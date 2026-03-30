@@ -1,6 +1,8 @@
 import type { Actions, PageServerLoad } from './$types';
 import db, { type Vehicle } from '$lib/server/db';
 import { fail, redirect, error } from '@sveltejs/kit';
+import { unlink } from 'fs/promises';
+import { join } from 'path';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const vehicle = db.prepare('SELECT * FROM vehicles WHERE id = ?').get(params.id) as Vehicle | undefined;
@@ -57,6 +59,17 @@ export const actions: Actions = {
 	},
 
 	delete: async ({ params }) => {
+		const vehicle = db.prepare('SELECT images FROM vehicles WHERE id = ?').get(params.id) as { images: string } | undefined;
+
+		if (vehicle) {
+			const images: string[] = JSON.parse(vehicle.images || '[]');
+			for (const imgPath of images) {
+				// imgPath is like /uploads/filename.jpg — map to filesystem
+				const filePath = join(process.cwd(), 'static', imgPath);
+				await unlink(filePath).catch(() => {}); // ignore if already missing
+			}
+		}
+
 		db.prepare('DELETE FROM vehicles WHERE id = ?').run(params.id);
 		throw redirect(302, '/admin');
 	},
