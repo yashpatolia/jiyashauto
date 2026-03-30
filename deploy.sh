@@ -3,7 +3,7 @@ set -e
 cd ~/jiyashauto
 git stash
 git pull origin master
-npm install --omit=dev
+npm install
 npm run build
 pm2 restart jiyashauto
 echo "Deploy complete"
