@@ -18,6 +18,17 @@
 		{ label: 'Inquiries', value: data.stats.totalSubmissions, color: 'red' }
 	]);
 
+	const SPAM_PATTERNS = [
+		/https?:\/\//i, /www\./i, /\.(com|net|org|io|co)\b/i,
+		/free\s+(trial|ad|promo|commercial|broadcast|edit)/i,
+		/tv\s*commercial/i, /lead\s*list/i, /target\s*lead/i,
+		/broadcast/i, /top shelf/i, /seo\s*(service|boost|rank)/i,
+		/backlink/i, /crypto|bitcoin|forex|investment opportunity/i,
+	];
+	function isSpam(s: { name: string; message: string }) {
+		return SPAM_PATTERNS.some((p) => p.test(`${s.name} ${s.message}`));
+	}
+
 	let cleanupMessage = $state('');
 	let cleaningUp = $state(false);
 
@@ -112,7 +123,12 @@
 				{#each data.recentSubmissions as s}
 					<div class="flex items-center justify-between px-6 py-3.5">
 						<div>
-							<div class="text-sm font-medium text-gray-900 dark:text-white">{s.name}</div>
+							<div class="flex items-center gap-2">
+								<span class="text-sm font-medium text-gray-900 dark:text-white">{s.name}</span>
+								{#if isSpam(s)}
+									<span class="text-xs bg-yellow-100 dark:bg-yellow-950 text-yellow-700 dark:text-yellow-400 px-2 py-0.5 rounded-full">Possible Spam</span>
+								{/if}
+							</div>
 							<div class="text-xs text-gray-500">{s.email} · {s.inquiry_type}</div>
 						</div>
 						<div class="text-xs text-gray-400">{formatDate(s.created_at)}</div>
