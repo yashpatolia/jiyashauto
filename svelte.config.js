@@ -12,7 +12,7 @@ const config = {
 		}
 	},
 	kit: {
-		adapter: adapter()
+		adapter: adapter({ bodyLimit: 20 * 1024 * 1024 })
 	}
 };
 
