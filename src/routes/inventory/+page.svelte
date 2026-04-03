@@ -9,7 +9,7 @@
 	let filterMaxPrice = $state('');
 	let filterMinYear = $state('');
 	let filterMaxYear = $state('');
-	let showSold = $state(data.showSold);
+	const showSold = $derived(data.showSold);
 
 	const filtered = $derived(
 		data.vehicles.filter((v) => {
@@ -78,6 +78,7 @@
 	</div>
 </section>
 
+<div class="min-h-screen bg-gray-200 dark:bg-gray-950">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 	<div class="flex flex-col lg:flex-row gap-8">
 		<!-- Filters Sidebar -->
@@ -279,4 +280,5 @@
 			{/if}
 		</div>
 	</div>
+</div>
 </div>

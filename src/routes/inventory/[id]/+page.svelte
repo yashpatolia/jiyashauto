@@ -84,18 +84,18 @@
 {/if}
 
 <!-- Breadcrumb -->
-<div class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3">
+<div class="bg-gray-900 border-b border-gray-800 px-4 py-3">
 	<div class="w-full px-8 sm:px-14 lg:px-24">
-		<nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-			<a href="/" class="hover:text-red-600 transition-colors">Home</a>
+		<nav class="flex items-center gap-2 text-sm text-gray-400">
+			<a href="/" class="hover:text-red-400 transition-colors">Home</a>
 			<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
 			</svg>
-			<a href="/inventory" class="hover:text-red-600 transition-colors">Inventory</a>
+			<a href="/inventory" class="hover:text-red-400 transition-colors">Inventory</a>
 			<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
 			</svg>
-			<span class="text-gray-900 dark:text-white font-medium">{vehicle.year} {vehicle.make} {vehicle.model}</span>
+			<span class="text-white font-medium">{vehicle.year} {vehicle.make} {vehicle.model}</span>
 		</nav>
 	</div>
 </div>
