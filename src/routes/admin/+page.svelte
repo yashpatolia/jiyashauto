@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -121,7 +122,7 @@
 			</div>
 			<div class="divide-y divide-gray-100 dark:divide-gray-800">
 				{#each data.recentSubmissions as s}
-					<div class="flex items-center justify-between px-6 py-3.5">
+					<div class="flex items-center justify-between px-6 py-3.5 group">
 						<div>
 							<div class="flex items-center gap-2">
 								<span class="text-sm font-medium text-gray-900 dark:text-white">{s.name}</span>
@@ -131,7 +132,17 @@
 							</div>
 							<div class="text-xs text-gray-500">{s.email} · {s.inquiry_type}</div>
 						</div>
-						<div class="text-xs text-gray-400">{formatDate(s.created_at)}</div>
+						<div class="flex items-center gap-3">
+							<span class="text-xs text-gray-400">{formatDate(s.created_at)}</span>
+							<form method="POST" action="?/deleteSubmission" use:enhance>
+								<input type="hidden" name="id" value={s.id} />
+								<button type="submit" class="text-gray-400 hover:text-red-600 transition-colors" aria-label="Delete">
+									<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+									</svg>
+								</button>
+							</form>
+						</div>
 					</div>
 				{:else}
 					<div class="px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">No submissions yet.</div>

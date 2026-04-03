@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
 import db from '$lib/server/db';
 
 export const load: PageServerLoad = async () => {
@@ -20,4 +20,12 @@ export const load: PageServerLoad = async () => {
 		recentVehicles,
 		recentSubmissions
 	};
+};
+
+export const actions: Actions = {
+	deleteSubmission: async ({ request }) => {
+		const data = await request.formData();
+		const id = parseInt(data.get('id') as string);
+		if (id) db.prepare('DELETE FROM contact_submissions WHERE id = ?').run(id);
+	}
 };
