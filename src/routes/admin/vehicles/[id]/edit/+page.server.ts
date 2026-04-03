@@ -47,6 +47,17 @@ export const actions: Actions = {
 		const duplicate = db.prepare('SELECT id FROM vehicles WHERE vin = ? AND id != ?').get(vin, params.id);
 		if (duplicate) return fail(400, { error: `Another vehicle with VIN ${vin} already exists.` });
 
+		const existing = db.prepare('SELECT images FROM vehicles WHERE id = ?').get(params.id) as { images: string } | undefined;
+		if (existing) {
+			const oldImages: string[] = JSON.parse(existing.images || '[]');
+			const newImages: string[] = JSON.parse(images);
+			for (const imgPath of oldImages) {
+				if (!newImages.includes(imgPath)) {
+					await unlink(join(process.cwd(), 'static', imgPath)).catch(() => {});
+				}
+			}
+		}
+
 		db.prepare(`
 			UPDATE vehicles SET
 				year=?, make=?, model=?, price=?, mileage=?, vin=?, description=?, images=?, is_sold=?, is_public=?,

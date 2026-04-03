@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { beforeNavigate } from '$app/navigation';
+
 	interface Vehicle {
 		id?: number;
 		year?: number;
@@ -36,6 +38,14 @@
 	let uploading = $state(false);
 	let submitting = $state(false);
 
+	beforeNavigate(() => {
+		if (!submitting) {
+			for (const path of uploadedImages) {
+				fetch('/api/upload', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ path }) });
+			}
+		}
+	});
+
 	async function handleFileChange(e: Event) {
 		const input = e.target as HTMLInputElement;
 		if (!input.files?.length) return;
@@ -63,9 +73,20 @@
 
 	function removeUploaded(path: string) {
 		uploadedImages = uploadedImages.filter((p) => p !== path);
+		fetch('/api/upload', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ path }) });
 	}
 
-	const allImages = $derived([...existingImages, ...uploadedImages]);
+	let mainImage = $state<string | null>(vehicle.images?.[0] ?? null);
+
+	const allImages = $derived(
+		mainImage && [...existingImages, ...uploadedImages].includes(mainImage)
+			? [mainImage, ...[...existingImages, ...uploadedImages].filter((i) => i !== mainImage)]
+			: [...existingImages, ...uploadedImages]
+	);
+
+	function setMain(path: string) {
+		mainImage = path;
+	}
 </script>
 
 {#if error}
@@ -239,29 +260,27 @@
 
 		{#if allImages.length > 0}
 			<div class="flex flex-wrap gap-3 mb-3">
-				{#each existingImages as img}
-					<div class="relative group w-24 h-18 rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700">
+				{#each allImages as img}
+					{@const isMain = img === allImages[0]}
+					{@const isUploaded = uploadedImages.includes(img)}
+					<div
+						class="relative group w-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-colors {isMain ? 'border-red-500' : isUploaded ? 'border-green-400 dark:border-green-600' : 'border-gray-200 dark:border-gray-700'}"
+						style="height: 4.5rem"
+						onclick={() => setMain(img)}
+						role="button"
+						tabindex="0"
+						onkeydown={(e) => e.key === 'Enter' && setMain(img)}
+					>
 						<img src={img} alt="Vehicle photo" class="w-full h-full object-cover" />
+						{#if isMain}
+							<span class="absolute bottom-0 left-0 right-0 text-center text-white text-[10px] font-semibold bg-red-500/80 py-0.5">Main</span>
+						{/if}
 						<button
 							type="button"
-							onclick={() => removeExisting(img)}
-							class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white"
+							onclick={(e) => { e.stopPropagation(); isUploaded ? removeUploaded(img) : removeExisting(img); }}
+							class="absolute top-1 right-1 w-5 h-5 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white"
 						>
-							<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-							</svg>
-						</button>
-					</div>
-				{/each}
-				{#each uploadedImages as img}
-					<div class="relative group w-24 h-18 rounded-xl overflow-hidden border-2 border-green-400 dark:border-green-600">
-						<img src={img} alt="Uploaded photo" class="w-full h-full object-cover" />
-						<button
-							type="button"
-							onclick={() => removeUploaded(img)}
-							class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white"
-						>
-							<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 							</svg>
 						</button>

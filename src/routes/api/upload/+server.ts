@@ -1,8 +1,8 @@
 import type { RequestHandler } from './$types';
 import { json, error } from '@sveltejs/kit';
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
-import { join, extname } from 'path';
+import { join, extname, basename } from 'path';
 import { randomUUID } from 'crypto';
 
 const UPLOADS_DIR = join(process.cwd(), 'static', 'uploads');
@@ -48,4 +48,24 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	}
 
 	return json({ paths });
+};
+
+export const DELETE: RequestHandler = async ({ request, locals }) => {
+	if (!locals.admin) {
+		throw error(403, 'Unauthorized');
+	}
+
+	const { path } = await request.json() as { path: string };
+
+	// Only allow deleting files within /uploads/
+	if (!path || !path.startsWith('/uploads/')) {
+		throw error(400, 'Invalid path');
+	}
+
+	const filename = basename(path);
+	const filePath = join(UPLOADS_DIR, filename);
+
+	await unlink(filePath).catch(() => {});
+
+	return json({ ok: true });
 };

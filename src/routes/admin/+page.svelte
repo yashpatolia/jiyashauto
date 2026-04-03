@@ -17,6 +17,21 @@
 		{ label: 'Sold Vehicles', value: data.stats.soldVehicles, color: 'gray' },
 		{ label: 'Inquiries', value: data.stats.totalSubmissions, color: 'red' }
 	]);
+
+	let cleanupMessage = $state('');
+	let cleaningUp = $state(false);
+
+	async function cleanupUploads() {
+		cleaningUp = true;
+		cleanupMessage = '';
+		try {
+			const res = await fetch('/api/cleanup-uploads', { method: 'POST' });
+			const { deleted } = await res.json();
+			cleanupMessage = deleted === 0 ? 'No orphaned images found.' : `Deleted ${deleted} orphaned image${deleted === 1 ? '' : 's'}.`;
+		} finally {
+			cleaningUp = false;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -107,5 +122,20 @@
 				{/each}
 			</div>
 		</div>
+	</div>
+
+	<!-- Storage cleanup -->
+	<div class="flex items-center justify-between bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 px-6 py-4">
+		<div>
+			<div class="text-sm font-medium text-gray-900 dark:text-white">Orphaned Images</div>
+			<div class="text-xs text-gray-500 mt-0.5">{cleanupMessage || 'Remove uploaded images not linked to any listing.'}</div>
+		</div>
+		<button
+			onclick={cleanupUploads}
+			disabled={cleaningUp}
+			class="text-sm font-medium px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
+		>
+			{cleaningUp ? 'Cleaning…' : 'Clean Up'}
+		</button>
 	</div>
 </div>
