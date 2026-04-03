@@ -8,8 +8,8 @@ export const load: PageServerLoad = async () => {
 	const totalSubmissions = (db.prepare('SELECT COUNT(*) as count FROM contact_submissions').get() as { count: number }).count;
 
 	const recentVehicles = db
-		.prepare('SELECT id, year, make, model, price, is_sold FROM vehicles ORDER BY created_at DESC LIMIT 5')
-		.all() as { id: number; year: number; make: string; model: string; price: number; is_sold: number }[];
+		.prepare('SELECT id, year, make, model, price, is_sold, is_public FROM vehicles ORDER BY created_at DESC LIMIT 5')
+		.all() as { id: number; year: number; make: string; model: string; price: number; is_sold: number; is_public: number }[];
 
 	const recentSubmissions = db
 		.prepare('SELECT id, name, email, inquiry_type, created_at FROM contact_submissions ORDER BY created_at DESC LIMIT 5')
