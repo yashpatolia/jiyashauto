@@ -19,6 +19,7 @@
 		ext_color?: string;
 		int_color?: string;
 		engine?: string;
+		body_type?: string;
 	}
 
 	let {
@@ -192,7 +193,17 @@
 	</div>
 
 	<!-- Vehicle specs -->
-	<div class="grid sm:grid-cols-3 gap-5">
+	<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+		<div>
+			<label for="body_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Body Type</label>
+			<select id="body_type" name="body_type"
+				class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500">
+				<option value="">Select</option>
+				{#each ['Sedan', 'Coupe', 'Hatchback', 'SUV', 'Crossover', 'Truck', 'Minivan', 'Van', 'Wagon', 'Convertible', 'Sports Car'] as opt}
+					<option value={opt} selected={vehicle.body_type === opt}>{opt}</option>
+				{/each}
+			</select>
+		</div>
 		<div>
 			<label for="engine" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Engine</label>
 			<input type="text" id="engine" name="engine" value={vehicle.engine ?? ''} placeholder="e.g. 2.0L Turbo"

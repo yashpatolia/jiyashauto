@@ -36,6 +36,7 @@ export const actions: Actions = {
 		const ext_color = (data.get('ext_color') as string)?.trim() ?? '';
 		const int_color = (data.get('int_color') as string)?.trim() ?? '';
 		const engine = (data.get('engine') as string)?.trim() ?? '';
+		const body_type = (data.get('body_type') as string)?.trim() ?? '';
 
 		if (!year || isNaN(year)) return fail(400, { error: 'Invalid year.' });
 		if (!make) return fail(400, { error: 'Make is required.' });
@@ -61,10 +62,10 @@ export const actions: Actions = {
 		db.prepare(`
 			UPDATE vehicles SET
 				year=?, make=?, model=?, price=?, mileage=?, vin=?, description=?, images=?, is_sold=?, is_public=?,
-				fuel_type=?, transmission=?, drive_type=?, ext_color=?, int_color=?, engine=?
+				fuel_type=?, transmission=?, drive_type=?, ext_color=?, int_color=?, engine=?, body_type=?
 			WHERE id=?
 		`).run(year, make, model, price, mileage, vin, description, images, is_sold, is_public,
-			   fuel_type, transmission, drive_type, ext_color, int_color, engine, params.id);
+			   fuel_type, transmission, drive_type, ext_color, int_color, engine, body_type, params.id);
 
 		throw redirect(302, '/admin');
 	},

@@ -52,7 +52,8 @@ const newCols: [string, string][] = [
 	['ext_color', 'TEXT DEFAULT ""'],
 	['int_color', 'TEXT DEFAULT ""'],
 	['engine', 'TEXT DEFAULT ""'],
-	['is_public', 'INTEGER DEFAULT 1']
+	['is_public', 'INTEGER DEFAULT 1'],
+	['body_type', 'TEXT DEFAULT ""']
 ];
 for (const [col, def] of newCols) {
 	if (!existingCols.includes(col)) {
@@ -138,6 +139,7 @@ export type Vehicle = {
 	ext_color: string;
 	int_color: string;
 	engine: string;
+	body_type: string;
 };
 
 export type ContactSubmission = {

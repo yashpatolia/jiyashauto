@@ -85,7 +85,7 @@
 
 <!-- Breadcrumb -->
 <div class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3">
-	<div class="max-w-7xl mx-auto">
+	<div class="w-full px-8 sm:px-14 lg:px-24">
 		<nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
 			<a href="/" class="hover:text-red-600 transition-colors">Home</a>
 			<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -100,12 +100,12 @@
 	</div>
 </div>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="w-full px-8 sm:px-14 lg:px-24 py-10">
 	<div class="grid lg:grid-cols-5 gap-10">
 		<!-- Left: Gallery -->
 		<div class="lg:col-span-3">
 			<!-- Main image -->
-			<div class="relative bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden aspect-video">
+			<div class="relative bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden" style="height: clamp(400px, 45vw, 680px);">
 				{#if vehicle.images.length > 0}
 					<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
 					<img
@@ -177,6 +177,7 @@
 				{#each [
 					{ label: 'Year', value: String(vehicle.year) },
 					{ label: 'Mileage', value: formatMileage(vehicle.mileage) },
+					{ label: 'Body Type', value: vehicle.body_type || '—' },
 					{ label: 'Fuel Type', value: vehicle.fuel_type || '—' },
 					{ label: 'Transmission', value: vehicle.transmission || '—' },
 					{ label: 'Drive Type', value: vehicle.drive_type || '—' },
@@ -211,14 +212,6 @@
 				<a href="/contact?inquiry=Vehicle Inquiry&vehicle={vehicle.year} {vehicle.make} {vehicle.model} (Carfax Request)" class="shrink-0 text-xs font-semibold bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg transition-colors">Request Report</a>
 			</div>
 
-			<!-- Description -->
-			{#if vehicle.description}
-				<div class="mb-6">
-					<h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-3">Vehicle Notes</h3>
-					<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{vehicle.description}</p>
-				</div>
-			{/if}
-
 			<!-- CTA -->
 			{#if !vehicle.is_sold}
 				<div class="space-y-3">
@@ -249,4 +242,12 @@
 			{/if}
 		</div>
 	</div>
+
+	<!-- Description -->
+	{#if vehicle.description}
+		<div class="mt-10 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8">
+			<h3 class="text-base font-semibold text-gray-900 dark:text-white mb-4">About This Vehicle</h3>
+			<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed whitespace-pre-line">{vehicle.description}</p>
+		</div>
+	{/if}
 </div>

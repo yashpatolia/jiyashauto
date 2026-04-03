@@ -265,7 +265,11 @@
 									</div>
 								</div>
 								<div class="mt-4 flex items-center justify-between">
-									<span class="text-xs text-gray-400 font-mono">VIN: {vehicle.vin.slice(-8)}</span>
+									{#if vehicle.body_type}
+										<span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded-full">{vehicle.body_type}</span>
+									{:else}
+										<span></span>
+									{/if}
 									<span class="text-xs text-red-600 font-medium group-hover:underline">View Details →</span>
 								</div>
 							</div>
