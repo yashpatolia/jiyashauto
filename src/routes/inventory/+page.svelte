@@ -247,8 +247,10 @@
 											{vehicle.year} {vehicle.make} {vehicle.model}
 										</h3>
 									</div>
-									<div class="text-lg font-bold text-red-600 shrink-0">
-										{formatPrice(vehicle.price)}
+									<div class="shrink-0 text-right">
+										<div class="text-lg font-bold text-red-600">{formatPrice(vehicle.price)}</div>
+										<div class="text-xs text-gray-500 dark:text-gray-400">+ tax</div>
+										<div class="text-xs text-gray-500 dark:text-gray-400">+ licensing</div>
 									</div>
 								</div>
 								<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">

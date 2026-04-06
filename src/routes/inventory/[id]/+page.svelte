@@ -169,7 +169,10 @@
 				<h1 class="text-3xl font-bold text-gray-900 dark:text-white leading-tight mb-2">
 					{vehicle.year} {vehicle.make} {vehicle.model}
 				</h1>
-				<div class="text-4xl font-extrabold text-red-600">{formatPrice(vehicle.price)}</div>
+				<div>
+					<span class="text-4xl font-extrabold text-red-600">{formatPrice(vehicle.price)}</span>
+					<span class="text-sm text-gray-500 dark:text-gray-400"> + tax + licensing</span>
+				</div>
 			</div>
 
 			<!-- Key Specs -->
