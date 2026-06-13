@@ -2,14 +2,13 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3000"
     env_file:
       - .env
     volumes:
       - db_data:/app/db
-      - uploads_data:/app/static/uploads
+      - ./static/uploads:/app/static/uploads
     restart: unless-stopped
 
 volumes:
   db_data:
-  uploads_data:
