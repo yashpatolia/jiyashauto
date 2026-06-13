@@ -1,42 +1,57 @@
-# sv
+# Jiyash Auto
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Full-stack car dealership website for [Jiyash Auto](https://jiyashauto.com), Cambridge, ON.
 
-## Creating a project
+Built with SvelteKit 5, Tailwind CSS v4, and SQLite — containerized with Docker and deployed to a VPS via GitHub Actions.
 
-If you're seeing this, you've probably already done this step. Congrats!!
+## Tech Stack
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- **SvelteKit 2** + Svelte 5 (runes mode)
+- **Tailwind CSS v4**
+- **better-sqlite3** — SQLite database
+- **adapter-node** — Node.js production server
+- **Docker** + Docker Compose
+- **GitHub Actions** — CI/CD to VPS on push to `master`
 
-To recreate this project with the same configuration:
+## Features
 
-```sh
-# recreate this project
-npx sv@0.13.0 create --template minimal --types ts --add tailwindcss="plugins:none" --no-download-check --install npm .
-```
+- Public inventory listing with filters (make, price, year, body type)
+- Vehicle detail pages with image lightbox gallery
+- Contact form with inquiry tracking
+- Admin panel — add/edit/delete vehicles, manage submissions, toggle visibility/sold status
+- Image uploads (admin-only)
+- HMAC-signed session auth
 
-## Developing
+## Local Development
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+cp .env.example .env   # fill in ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_SECRET
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Running with Docker
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+cp .env.example .env   # fill in credentials
+docker compose up --build
 ```
 
-You can preview the production build with `npm run preview`.
+App runs at `http://localhost:3000`. The SQLite database and uploaded images are persisted in named Docker volumes across restarts.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Deployment
+
+Pushing to `master` triggers a GitHub Actions workflow that SSHes into the VPS and runs `deploy.sh`, which pulls the latest code and rebuilds the Docker container.
+
+**One-time VPS setup:**
+1. Install Docker (`curl -fsSL https://get.docker.com | sh`)
+2. Copy `.env` to the server (`scp .env user@host:~/jiyashauto/.env`)
+3. Add GitHub secrets: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_PORT`
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `ADMIN_USERNAME` | Admin login username |
+| `ADMIN_PASSWORD` | Admin login password |
+| `ADMIN_SECRET` | Secret key for HMAC session signing |
