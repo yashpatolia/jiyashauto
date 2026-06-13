@@ -3,7 +3,5 @@ set -e
 cd ~/jiyashauto
 git stash
 git pull origin master
-npm install
-npm run build
-pm2 restart jiyashauto
+docker compose up --build -d
 echo "Deploy complete"
