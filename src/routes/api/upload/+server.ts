@@ -2,8 +2,9 @@ import type { RequestHandler } from './$types';
 import { json, error } from '@sveltejs/kit';
 import { writeFile, mkdir, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
-import { join, extname, basename } from 'path';
+import { join, basename } from 'path';
 import { randomUUID } from 'crypto';
+import sharp from 'sharp';
 
 const UPLOADS_DIR = join(process.cwd(), 'static', 'uploads');
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -37,12 +38,15 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			throw error(400, `File ${file.name} exceeds 10MB limit`);
 		}
 
-		const ext = extname(file.name).toLowerCase() || '.jpg';
-		const filename = `${randomUUID()}${ext}`;
+		const filename = `${randomUUID()}.webp`;
 		const filePath = join(UPLOADS_DIR, filename);
 
 		const buffer = Buffer.from(await file.arrayBuffer());
-		await writeFile(filePath, buffer);
+		const processed = await sharp(buffer)
+			.resize({ width: 1200, withoutEnlargement: true })
+			.webp({ quality: 82 })
+			.toBuffer();
+		await writeFile(filePath, processed);
 
 		paths.push(`/uploads/${filename}`);
 	}

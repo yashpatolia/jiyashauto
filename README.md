@@ -47,6 +47,12 @@ Pushing to `master` triggers a GitHub Actions workflow that SSHes into the VPS a
 1. Install Docker (`curl -fsSL https://get.docker.com | sh`)
 2. Copy `.env` to the server (`scp .env user@host:~/jiyashauto/.env`)
 3. Add GitHub secrets: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `VPS_PORT`
+4. Set up daily DB backups via cron:
+   ```bash
+   chmod +x ~/jiyashauto/backup.sh
+   (crontab -l 2>/dev/null; echo "0 2 * * * bash ~/jiyashauto/backup.sh >> ~/jiyashauto/db/backups/backup.log 2>&1") | crontab -
+   ```
+   Backups are saved to `~/jiyashauto/db/backups/` and kept for 7 days. A backup also runs automatically before every deploy.
 
 ## Environment Variables
 
