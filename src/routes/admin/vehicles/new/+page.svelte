@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Add Vehicle — Jiyash Auto Admin</title>
+	<title>Add Vehicle | Jiyash Auto Admin</title>
 </svelte:head>
 
 <div class="max-w-3xl">

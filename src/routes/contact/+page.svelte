@@ -10,17 +10,17 @@
 
 	const hours = [
 		{ day: 'Sunday', time: 'Closed', closed: true },
-		{ day: 'Monday', time: '9:00 AM – 5:30 PM', closed: false },
-		{ day: 'Tuesday', time: '9:00 AM – 5:30 PM', closed: false },
-		{ day: 'Wednesday', time: '9:00 AM – 5:30 PM', closed: false },
-		{ day: 'Thursday', time: '9:00 AM – 5:30 PM', closed: false },
-		{ day: 'Friday', time: '9:00 AM – 5:30 PM', closed: false },
-		{ day: 'Saturday', time: '9:00 AM – 1:30 PM', closed: false }
+		{ day: 'Monday', time: '9:00 AM to 5:30 PM', closed: false },
+		{ day: 'Tuesday', time: '9:00 AM to 5:30 PM', closed: false },
+		{ day: 'Wednesday', time: '9:00 AM to 5:30 PM', closed: false },
+		{ day: 'Thursday', time: '9:00 AM to 5:30 PM', closed: false },
+		{ day: 'Friday', time: '9:00 AM to 5:30 PM', closed: false },
+		{ day: 'Saturday', time: '9:00 AM to 1:30 PM', closed: false }
 	];
 </script>
 
 <svelte:head>
-	<title>Contact Us — Jiyash Auto</title>
+	<title>Contact Us | Jiyash Auto</title>
 	<meta name="description" content="Contact Jiyash Auto in Cambridge, ON. Book a service appointment, inquire about a vehicle, or just say hello." />
 </svelte:head>
 

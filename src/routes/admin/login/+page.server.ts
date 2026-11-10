@@ -1,42 +1,14 @@
-import type { Actions, PageServerLoad } from './$types';
-import { env } from '$env/dynamic/private';
-const { ADMIN_USERNAME, ADMIN_PASSWORD } = env;
-import { createSessionToken } from '$lib/server/auth';
-import { fail, redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ locals }) => {
+const errors: Record<string, string> = {
+	denied: 'That Google account is not authorized to access the admin dashboard.',
+	failed: 'Google sign-in failed. Please try again.'
+};
+
+export const load: PageServerLoad = async ({ locals, url }) => {
 	if (locals.admin) {
 		throw redirect(302, '/admin');
 	}
-	return {};
-};
-
-export const actions: Actions = {
-	default: async ({ request, cookies }) => {
-		const data = await request.formData();
-		const username = (data.get('username') as string)?.trim();
-		const password = data.get('password') as string;
-
-		if (!username || !password) {
-			return fail(400, { error: 'Please enter your credentials.' });
-		}
-
-		if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
-			// Delay to slow brute-force attempts
-			await new Promise((r) => setTimeout(r, 500));
-			return fail(401, { error: 'Invalid username or password.' });
-		}
-
-		const token = createSessionToken(username);
-
-		cookies.set('admin_session', token, {
-			path: '/',
-			httpOnly: true,
-			sameSite: 'lax',
-			secure: process.env.NODE_ENV === 'production',
-			maxAge: 60 * 60 * 24 // 24 hours
-		});
-
-		throw redirect(302, '/admin');
-	}
+	return { error: errors[url.searchParams.get('error') ?? ''] ?? null };
 };

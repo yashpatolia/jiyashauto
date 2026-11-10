@@ -45,7 +45,7 @@
 				'Caliper inspection and lubrication',
 				'Road test verification'
 			],
-			badge: '~1–2 hrs',
+			badge: '~1 to 2 hrs',
 			icon: 'brake'
 		},
 		{
@@ -68,7 +68,7 @@
 			title: 'Diagnostics',
 			tagline: 'Find It Fast, Fix It Right',
 			description:
-				"Modern vehicles are packed with sensors and onboard computers — when something goes wrong, they tell us exactly where to look. Our advanced OBD-II diagnostic equipment communicates with your vehicle's ECU to quickly identify fault codes, sensor failures, and performance issues, getting you back on the road faster.",
+				"Modern vehicles are packed with sensors and onboard computers. When something goes wrong, they tell us exactly where to look. Our advanced OBD-II diagnostic equipment communicates with your vehicle's ECU to quickly identify fault codes, sensor failures, and performance issues, getting you back on the road faster.",
 			includes: [
 				'Full OBD-II fault code scan',
 				'Live sensor data analysis',
@@ -84,7 +84,7 @@
 </script>
 
 <svelte:head>
-	<title>Services — Jiyash Auto</title>
+	<title>Services | Jiyash Auto</title>
 	<meta name="description" content="Professional auto service and maintenance at Jiyash Auto in Cambridge, ON. Oil changes, tire rotations, brake service, general repairs, and diagnostics." />
 </svelte:head>
 

@@ -56,6 +56,12 @@
 						{link.label}
 					</a>
 				{/each}
+				<a
+					href="/admin/login"
+					class="hidden md:block ml-2 px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-red-600 hover:border-red-600 transition-colors"
+				>
+					Admin Login
+				</a>
 
 				<!-- Mobile menu button -->
 				<button
@@ -92,6 +98,13 @@
 						{link.label}
 					</a>
 				{/each}
+				<a
+					href="/admin/login"
+					onclick={closeMobileMenu}
+					class="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+				>
+					Admin Login
+				</a>
 			</div>
 		</div>
 	{/if}
@@ -179,12 +192,12 @@
 				<h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Hours</h3>
 				<ul class="space-y-1.5 text-sm">
 					<li class="flex justify-between gap-4">
-						<span class="text-gray-400">Mon–Fri</span>
-						<span class="text-white">9:00 AM – 5:30 PM</span>
+						<span class="text-gray-400">Mon to Fri</span>
+						<span class="text-white">9:00 AM to 5:30 PM</span>
 					</li>
 					<li class="flex justify-between gap-4">
 						<span class="text-gray-400">Saturday</span>
-						<span class="text-white">9:00 AM – 1:30 PM</span>
+						<span class="text-white">9:00 AM to 1:30 PM</span>
 					</li>
 					<li class="flex justify-between gap-4">
 						<span class="text-gray-400">Sunday</span>

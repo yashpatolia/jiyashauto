@@ -33,7 +33,7 @@
 </script>
 
 <svelte:head>
-	<title>{vehicle.year} {vehicle.make} {vehicle.model} — Jiyash Auto</title>
+	<title>{vehicle.year} {vehicle.make} {vehicle.model} | Jiyash Auto</title>
 	<meta name="description" content="View details for this {vehicle.year} {vehicle.make} {vehicle.model} at Jiyash Auto in Cambridge, ON. Priced at {formatPrice(vehicle.price)}." />
 </svelte:head>
 
@@ -61,7 +61,7 @@
 		<div class="relative max-w-5xl w-full mx-4" onclick={(e) => e.stopPropagation()}>
 			<img
 				src={vehicle.images[activeImage]}
-				alt="{vehicle.year} {vehicle.make} {vehicle.model} — photo {activeImage + 1}"
+				alt="{vehicle.year} {vehicle.make} {vehicle.model}: photo {activeImage + 1}"
 				class="w-full max-h-[80vh] object-contain rounded-xl"
 			/>
 			{#if vehicle.images.length > 1}
@@ -180,13 +180,13 @@
 				{#each [
 					{ label: 'Year', value: String(vehicle.year) },
 					{ label: 'Mileage', value: formatMileage(vehicle.mileage) },
-					{ label: 'Body Type', value: vehicle.body_type || '—' },
-					{ label: 'Fuel Type', value: vehicle.fuel_type || '—' },
-					{ label: 'Transmission', value: vehicle.transmission || '—' },
-					{ label: 'Drive Type', value: vehicle.drive_type || '—' },
-					{ label: 'Engine', value: vehicle.engine || '—' },
-					{ label: 'Color', value: vehicle.ext_color || '—' },
-					{ label: 'Int. Color', value: vehicle.int_color || '—' }
+					{ label: 'Body Type', value: vehicle.body_type || 'N/A' },
+					{ label: 'Fuel Type', value: vehicle.fuel_type || 'N/A' },
+					{ label: 'Transmission', value: vehicle.transmission || 'N/A' },
+					{ label: 'Drive Type', value: vehicle.drive_type || 'N/A' },
+					{ label: 'Engine', value: vehicle.engine || 'N/A' },
+					{ label: 'Color', value: vehicle.ext_color || 'N/A' },
+					{ label: 'Int. Color', value: vehicle.int_color || 'N/A' }
 				] as spec}
 					<div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-3.5 border border-gray-200 dark:border-gray-800">
 						<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">{spec.label}</div>

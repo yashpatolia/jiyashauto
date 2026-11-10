@@ -31,6 +31,26 @@
 		});
 	}
 
+	const BUSINESS_EMAIL = 'jiyashautosales@gmail.com';
+
+	function gmailLink(s: { name: string; email: string; inquiry_type: string; message: string; created_at: string }) {
+		const quoted = s.message
+			.slice(0, 1500)
+			.split('\n')
+			.map((l) => `> ${l}`)
+			.join('\n');
+		const body = `Hi ${s.name},\n\n\n\n---\nOn ${formatDate(s.created_at)} you wrote:\n${quoted}`;
+		const params = new URLSearchParams({
+			view: 'cm',
+			fs: '1',
+			authuser: BUSINESS_EMAIL,
+			to: s.email,
+			su: `Re: your ${s.inquiry_type} inquiry`,
+			body
+		});
+		return `https://mail.google.com/mail/?${params}`;
+	}
+
 	const SPAM_PATTERNS = [
 		/https?:\/\//i,
 		/www\./i,
@@ -61,7 +81,7 @@
 </script>
 
 <svelte:head>
-	<title>Submissions — Jiyash Auto Admin</title>
+	<title>Submissions | Jiyash Auto Admin</title>
 </svelte:head>
 
 <div class="space-y-6">
@@ -196,7 +216,9 @@
 						</div>
 						<div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800 flex gap-3">
 							<a
-								href="mailto:{selectedSubmission.email}"
+								href={gmailLink(selectedSubmission)}
+								target="_blank"
+								rel="noopener noreferrer"
 								class="flex-1 text-center text-sm font-medium bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl transition-colors"
 							>
 								Reply by Email

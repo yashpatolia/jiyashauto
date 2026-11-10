@@ -62,7 +62,7 @@
 </script>
 
 <svelte:head>
-	<title>Inventory — Jiyash Auto</title>
+	<title>Inventory | Jiyash Auto</title>
 	<meta name="description" content="Browse our selection of quality pre-owned vehicles at Jiyash Auto in Cambridge, ON." />
 </svelte:head>
 

@@ -16,7 +16,8 @@
 </script>
 
 <div class="min-h-screen bg-gray-50 dark:bg-gray-950">
-	<!-- Admin top bar -->
+	<!-- Admin top bar (hidden on the login page) -->
+	{#if !page.url.pathname.startsWith('/admin/login')}
 	<header class="bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50" style="border-bottom: 2px solid #dc2626;">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex items-center justify-between h-16">
@@ -57,6 +58,7 @@
 			</div>
 		</div>
 	</header>
+	{/if}
 
 	<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 		{@render children()}

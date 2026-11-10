@@ -76,7 +76,7 @@ if (vehicleCount === 0) {
 		{
 			year: 2019, make: 'Honda', model: 'Civic LX',
 			price: 16995, mileage: 72400, vin: '2HGFC2F59KH543821',
-			description: 'Well-maintained 2019 Honda Civic LX in excellent condition. Features Apple CarPlay, Android Auto, backup camera, and Honda Sensing safety suite. Recent oil change and brake inspection completed. Clean Carfax — no accidents, single owner.',
+			description: 'Well-maintained 2019 Honda Civic LX in excellent condition. Features Apple CarPlay, Android Auto, backup camera, and Honda Sensing safety suite. Recent oil change and brake inspection completed. Clean Carfax, no accidents, single owner.',
 			images: '[]', is_sold: 0,
 			fuel_type: 'Gasoline', transmission: 'CVT', drive_type: 'FWD',
 			ext_color: 'Lunar Silver', int_color: 'Black', engine: '2.0L DOHC i-VTEC'

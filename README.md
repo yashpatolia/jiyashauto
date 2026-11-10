@@ -25,7 +25,7 @@ Built with SvelteKit 5, Tailwind CSS v4, and SQLite — containerized with Docke
 ## Local Development
 
 ```bash
-cp .env.example .env   # fill in ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_SECRET
+cp .env.example .env   # fill in the variables listed below
 npm install
 npm run dev
 ```
@@ -58,6 +58,10 @@ Pushing to `master` triggers a GitHub Actions workflow that SSHes into the VPS a
 
 | Variable | Description |
 |---|---|
-| `ADMIN_USERNAME` | Admin login username |
-| `ADMIN_PASSWORD` | Admin login password |
 | `ADMIN_SECRET` | Secret key for HMAC session signing |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
+| `ADMIN_EMAILS` | Comma-separated Google accounts allowed into `/admin` |
+| `SITE_URL` | Public site URL, used to build the Google redirect URI |
+
+Admin login uses Google sign-in. In the Google Cloud Console, create an OAuth client (type: Web application) and add `{SITE_URL}/admin/login/google/callback` as an authorized redirect URI.

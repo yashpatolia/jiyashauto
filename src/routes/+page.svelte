@@ -18,7 +18,7 @@
 		{
 			icon: 'wrench',
 			title: 'General Repairs',
-			desc: 'From minor fixes to major repairs — we handle it all with quality parts.'
+			desc: 'From minor fixes to major repairs, we handle it all with quality parts.'
 		},
 		{
 			icon: 'diag',
@@ -53,7 +53,7 @@
 			<span class="text-red-500">Perfect Ride</span>
 		</h1>
 		<p class="text-lg sm:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-			Quality pre-owned vehicles, honest pricing, and trusted service — right here in Cambridge, ON.
+			Quality pre-owned vehicles, honest pricing, and trusted service, right here in Cambridge, ON.
 			Your next vehicle is waiting.
 		</p>
 		<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -111,7 +111,7 @@
 				</p>
 				<p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
 					Whether you're looking for a reliable daily driver, a capable work truck, or a family SUV,
-					our team is here to help you find the perfect vehicle at a fair price — with no hidden fees,
+					our team is here to help you find the perfect vehicle at a fair price, with no hidden fees,
 					no pressure, and no nonsense.
 				</p>
 				<div class="flex flex-wrap gap-6">
@@ -165,8 +165,8 @@
 						<div>
 							<div class="text-sm font-medium text-gray-900 dark:text-white">Hours</div>
 							<div class="text-sm text-gray-500 dark:text-gray-400 space-y-0.5">
-								<div>Mon – Fri: 9:00 AM – 5:30 PM</div>
-								<div>Saturday: 9:00 AM – 1:30 PM</div>
+								<div>Mon to Fri: 9:00 AM to 5:30 PM</div>
+								<div>Saturday: 9:00 AM to 1:30 PM</div>
 								<div class="text-gray-400">Sunday: Closed</div>
 							</div>
 						</div>
@@ -228,7 +228,7 @@
 	<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, white 0%, transparent 50%), radial-gradient(circle at 80% 50%, white 0%, transparent 50%);"></div>
 	<div class="relative max-w-3xl mx-auto text-center">
 		<h2 class="text-4xl font-bold text-white mb-4">Ready to Find Your Next Vehicle?</h2>
-		<p class="text-red-100 text-lg mb-8">Browse our current inventory or get in touch — we'd love to help you find the perfect car.</p>
+		<p class="text-red-100 text-lg mb-8">Browse our current inventory or get in touch. We'd love to help you find the perfect car.</p>
 		<div class="flex flex-col sm:flex-row gap-4 justify-center">
 			<a href="/inventory" class="inline-flex items-center justify-center gap-2 bg-white text-red-600 hover:bg-red-50 font-semibold px-8 py-3.5 rounded-xl transition-colors text-base">
 				View Inventory

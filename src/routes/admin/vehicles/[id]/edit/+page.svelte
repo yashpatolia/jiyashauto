@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Edit {data.vehicle.year} {data.vehicle.make} {data.vehicle.model} — Admin</title>
+	<title>Edit {data.vehicle.year} {data.vehicle.make} {data.vehicle.model} | Admin</title>
 </svelte:head>
 
 <div class="max-w-3xl">

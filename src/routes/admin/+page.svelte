@@ -47,7 +47,7 @@
 </script>
 
 <svelte:head>
-	<title>Dashboard — Jiyash Auto Admin</title>
+	<title>Dashboard | Jiyash Auto Admin</title>
 </svelte:head>
 
 <div class="space-y-8">

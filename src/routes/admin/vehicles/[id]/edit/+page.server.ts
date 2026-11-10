@@ -76,7 +76,7 @@ export const actions: Actions = {
 		if (vehicle) {
 			const images: string[] = JSON.parse(vehicle.images || '[]');
 			for (const imgPath of images) {
-				// imgPath is like /uploads/filename.jpg — map to filesystem
+				// imgPath is like /uploads/filename.jpg, map to filesystem
 				const filePath = join(process.cwd(), 'static', imgPath);
 				await unlink(filePath).catch(() => {}); // ignore if already missing
 			}
